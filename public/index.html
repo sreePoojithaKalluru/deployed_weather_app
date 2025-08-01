@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather App</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <!-- ✅ Correct CSS path -->
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="wrapper">
+    <h1>Weather App</h1>
+
+    <!-- Tabs -->
+    <div class="tab-container">
+      <p class="tab" data-userWeather>Your Weather</p>
+      <p class="tab" data-searchWeather>Search Weather</p>
+    </div>
+
+    <div class="weather-container">
+      
+      <!-- 🔒 Location Access Prompt -->
+      <div class="grant-location-container sub-container">
+        <img src="/images/location.png" alt="Location Icon" width="80" height="80" loading="lazy" />
+        <p>Grant Location Access</p>
+        <p data-messageText>Allow access to get weather information</p>
+        <button class="btn" data-grantAccess>Grant Access</button>
+      </div>
+
+      <!-- 🔎 Search Weather Form -->
+      <form class="form-container" data-searchForm>
+        <input type="text" placeholder="Search for city..." data-searchInp />
+        <button class="btn" type="submit">
+          <img src="/images/search.png" alt="Search Icon" width="20" height="20" />
+        </button>
+      </form>
+
+      <!-- 🔄 Loading State -->
+      <div class="sub-container loading-container">
+        <img src="/images/loading.gif" alt="Loading..." width="150" height="150" />
+        <p>Loading...</p>
+      </div>
+
+      <!-- ☁️ Weather Info Display -->
+      <div class="sub-container user-info-container">
+        <div class="name">
+          <p data-cityName></p>
+          <img data-countryIcon crossorigin="anonymous" />
+        </div>
+        <p data-weatherDesc></p>
+        <img data-weatherIcon alt="Weather Icon" />
+        <p data-temp></p>
+
+        <div class="parameter-container">
+          <div class="parameter">
+            <img src="/images/wind.png" alt="Wind Icon" />
+            <p class="parameter-title">Wind Speed</p>
+            <p class="parameter-value" data-windspeed></p>
+          </div>
+          <div class="parameter">
+            <img src="/images/humidity.png" alt="Humidity Icon" />
+            <p class="parameter-title">Humidity</p>
+            <p class="parameter-value" data-humidity></p>
+          </div>
+          <div class="parameter">
+            <img src="/images/cloud.png" alt="Cloud Icon" />
+            <p class="parameter-title">Clouds</p>
+            <p class="parameter-value" data-cloudliness></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ❌ API Error Display -->
+      <div class="sub-container api-error-container">
+        <img src="/images/not-found.png" alt="Error: Not Found" data-notFoundImg />
+        <p data-api-ErrorText></p>
+        <button class="btn" data-apiErrprBtn>Retry</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Correct JS path -->
+  <script src="/js/script.js"></script>
+</body>
+</html>

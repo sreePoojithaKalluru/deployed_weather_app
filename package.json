@@ -1,0 +1,29 @@
+{
+  "name": "my-weather-app",
+  "version": "1.0.0",
+  "description": "Weather App using Node.js, Express, and MongoDB",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "weather",
+    "express",
+    "mongodb",
+    "nodejs",
+    "api"
+  ],
+  "author": "Pooja Reddy",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^5.1.0",
+    "mongodb": "^6.18.0",
+    "node-fetch": "^2.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
