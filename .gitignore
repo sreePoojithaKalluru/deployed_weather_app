@@ -3,3 +3,5 @@
 
 # Ignore node_modules folder (too big and unnecessary to upload)
 node_modules/
+node_modules
+.env

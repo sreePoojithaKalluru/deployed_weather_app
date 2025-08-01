@@ -1,313 +1,36 @@
-/* Reset and font */
-*, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Merriweather Sans', sans-serif;
-}
-
-:root {
-    --colorDark1: #112D4E;
-    --colorDark2: #3F72AF;
-    --colorLight1: #DBE2EF;
-    --colorLight2: #F9F7F7;
-}
-
+/* === Login & Admin Page Styles === */
 body {
-    max-width: 100vw;
-    min-height: 100vh;
-    color: var(--colorLight2);
-    background-color: var(--colorDark1);
-    background-image: linear-gradient(160deg, #112d4e 0%, #3f72af 100%);
-}
-
-/* Header */
-h1 {
-    text-align: center;
-    margin-block: 2rem;
-    text-transform: uppercase;
-    word-spacing: 2px;
-    letter-spacing: 1.75px;
-}
-
-/* Tabs */
-.tab-container {
-    width: 90%;
-    margin: 4rem auto 0;
-    max-width: 550px;
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
     display: flex;
-    justify-content: space-between;
-}
-
-.tab {
-    cursor: pointer;
-    font-size: 0.875rem;
-    letter-spacing: 1.75px;
-    padding: 5px 8px;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-}
-
-.tab.current-tab {
-    background-color: rgba(219, 226, 239, 0.5);
-}
-
-/* Main weather block spacing */
-.weather-container {
-    margin-block: 4rem;
-}
-
-/* Responsive typography */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 1.75rem;
-    }
-
-    .tab-container {
-        margin-top: 2rem;
-        width: 80%;
-    }
-
-    .tab {
-        font-size: 0.75rem;
-    }
-}
-
-/* Buttons */
-.btn {
-    all: unset;
-    cursor: pointer;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    padding: 10px 30px;
-    border-radius: 5px;
-    background-color: var(--colorDark2);
-    color: white;
-    text-align: center;
-    transition: background-color 0.3s;
-}
-
-.btn:hover {
-    background-color: #2e5c97;
-}
-
-/* Container formatting */
-.sub-container {
-    width: 90%;
-    margin: 0 auto;
-    max-width: 1000px;
-    display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 
-/* Grant Location */
-.grant-location-container {
-    display: none;
-    text-align: center;
+/* Fix white text on white background in admin/login containers */
+.container {
+    background: white;
+    color: black;  /* ✅ Ensures visible text */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.grant-location-container.active {
-    display: flex;
-}
-
-.grant-location-container img {
-    margin-bottom: 2rem;
-}
-
-.grant-location-container p:first-of-type {
-    font-size: 1.75rem;
-    font-weight: 600;
-}
-
-.grant-location-container p:last-of-type {
-    font-size: 0.85rem;
-    font-weight: 300;
-    margin: 0.75rem 0 1.75rem;
-    letter-spacing: 0.75px;
-}
-
-/* Loading State */
-.loading-container {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-}
-
-.loading-container.active {
-    display: flex;
-}
-
-.loading-container p {
-    text-transform: uppercase;
-}
-
-/* API Error */
-.api-error-container {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-}
-
-.api-error-container.active {
-    display: flex;
-}
-
-.api-error-container p {
-    text-align: center;
-}
-
-.api-error-container img {
+input, button {
+    display: block;
     width: 100%;
-    max-width: 300px;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
+    padding: 10px;
+    margin: 10px 0;
 }
 
-/* Weather Info */
-.user-info-container {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.user-info-container.active {
-    display: flex;
-}
-
-.user-info-container p {
-    font-size: 1.5rem;
-    font-weight: 200;
-    text-align: center;
-}
-
-.user-info-container img[data-weatherIcon] {
-    width: 90px;
-    height: 90px;
-}
-
-.name {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-.name p {
-    font-size: 2rem;
-}
-
-.name img {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
-}
-
-.user-info-container p[data-temp] {
-    font-size: 2.75rem;
-    font-weight: 700;
-}
-
-/* Parameters */
-.parameter-container {
-    width: 90%;
-    margin: 2rem auto 0;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px 20px;
-}
-
-.parameter {
-    width: 30%;
-    max-width: 200px;
-    background-color: rgba(219, 226, 239, 0.5);
-    border-radius: 5px;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    text-align: center;
-}
-
-.parameter img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-}
-
-.parameter-title {
-    font-size: 1.15rem;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-.parameter-value {
-    font-size: 1rem;
-    font-weight: 200;
-}
-
-/* Fix for small screens */
-@media (max-width: 768px) {
-    .parameter-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .parameter {
-        width: 100%;
-    }
-}
-
-/* Search Form */
-.form-container {
-    width: 90%;
-    max-width: 550px;
-    margin: 0 auto 3rem;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.form-container.active {
-    display: flex;
-}
-
-.form-container input {
-    all: unset;
-    width: calc(100% - 60px);
-    height: 40px;
-    padding: 0 20px;
-    background-color: rgba(219, 226, 239, 0.5);
-    border-radius: 10px;
+button {
+    background-color: #007bff;
     color: white;
+    border: none;
+    cursor: pointer;
 }
 
-.form-container input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.form-container input:focus {
-    outline: 2px solid rgba(255, 255, 255, 0.8);
-}
-
-.form-container .btn {
-    width: 40px;
-    height: 40px;
-    display: grid;
-    place-items: center;
-    padding: unset;
-    border-radius: 100%;
-}
-
-.form-container .btn img {
-    object-fit: contain;
-    width: 20px;
-    height: 20px;
+button:hover {
+    background-color: #0056b3;
 }

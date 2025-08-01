@@ -10,11 +10,20 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;700&display=swap" rel="stylesheet" />
 
-  <!-- ✅ Correct CSS path -->
+  <!-- CSS -->
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-  <div class="wrapper">
+  <!-- 🔘 Admin/User Choice Modal -->
+  <div id="userChoiceModal">
+    <div class="modal-content">
+      <h2>Who are you?</h2>
+      <button onclick="goToAdmin()">Admin</button>
+      <button onclick="goToUser()">User</button>
+    </div>
+  </div>
+
+  <div class="wrapper" style="display: none;">
     <h1>Weather App</h1>
 
     <!-- Tabs -->
@@ -23,69 +32,160 @@
       <p class="tab" data-searchWeather>Search Weather</p>
     </div>
 
-    <div class="weather-container">
-      
-      <!-- 🔒 Location Access Prompt -->
-      <div class="grant-location-container sub-container">
-        <img src="/images/location.png" alt="Location Icon" width="80" height="80" loading="lazy" />
-        <p>Grant Location Access</p>
-        <p data-messageText>Allow access to get weather information</p>
-        <button class="btn" data-grantAccess>Grant Access</button>
-      </div>
+    <!-- Grant location access -->
+    <div class="grant-location-container">
+      <p>Grant location access to get weather information</p>
+      <button data-grantAccess>Grant Access</button>
+      <p data-messageText style="color: red;"></p>
+    </div>
 
-      <!-- 🔎 Search Weather Form -->
-      <form class="form-container" data-searchForm>
-        <input type="text" placeholder="Search for city..." data-searchInp />
-        <button class="btn" type="submit">
-          <img src="/images/search.png" alt="Search Icon" width="20" height="20" />
-        </button>
-      </form>
+    <!-- Search form -->
+    <form data-searchForm class="form-container">
+      <input data-searchInp type="text" placeholder="Enter city" />
+      <button type="submit">Search</button>
+    </form>
 
-      <!-- 🔄 Loading State -->
-      <div class="sub-container loading-container">
-        <img src="/images/loading.gif" alt="Loading..." width="150" height="150" />
-        <p>Loading...</p>
-      </div>
+    <!-- Loading screen -->
+    <div class="loading-container">Loading...</div>
 
-      <!-- ☁️ Weather Info Display -->
-      <div class="sub-container user-info-container">
-        <div class="name">
-          <p data-cityName></p>
-          <img data-countryIcon crossorigin="anonymous" />
-        </div>
-        <p data-weatherDesc></p>
-        <img data-weatherIcon alt="Weather Icon" />
-        <p data-temp></p>
+    <!-- Error display -->
+    <div class="api-error-container">
+      <img data-notFoundImg src="https://cdn-icons-png.flaticon.com/512/2748/2748558.png" width="60" alt="Not found" />
+      <p data-api-ErrorText></p>
+      <button data-apiErrprBtn style="display:none">Retry</button>
+    </div>
 
-        <div class="parameter-container">
-          <div class="parameter">
-            <img src="/images/wind.png" alt="Wind Icon" />
-            <p class="parameter-title">Wind Speed</p>
-            <p class="parameter-value" data-windspeed></p>
-          </div>
-          <div class="parameter">
-            <img src="/images/humidity.png" alt="Humidity Icon" />
-            <p class="parameter-title">Humidity</p>
-            <p class="parameter-value" data-humidity></p>
-          </div>
-          <div class="parameter">
-            <img src="/images/cloud.png" alt="Cloud Icon" />
-            <p class="parameter-title">Clouds</p>
-            <p class="parameter-value" data-cloudliness></p>
-          </div>
-        </div>
-      </div>
+    <!-- Weather info -->
+    <div class="user-info-container">
+      <h2 data-cityName>City Name</h2>
+      <img data-countryIcon src="" alt="" width="50" />
+      <p data-weatherDesc>Description</p>
+      <img data-weatherIcon src="" alt="" width="60" />
+      <p data-temp>Temperature</p>
 
-      <!-- ❌ API Error Display -->
-      <div class="sub-container api-error-container">
-        <img src="/images/not-found.png" alt="Error: Not Found" data-notFoundImg />
-        <p data-api-ErrorText></p>
-        <button class="btn" data-apiErrprBtn>Retry</button>
+      <div class="extra-info">
+        <p><strong>Wind Speed:</strong> <span data-windspeed></span></p>
+        <p><strong>Humidity:</strong> <span data-humidity></span></p>
+        <p><strong>Cloudiness:</strong> <span data-cloudliness></span></p>
       </div>
     </div>
   </div>
 
-  <!-- ✅ Correct JS path -->
+  <!-- JS -->
   <script src="/js/script.js"></script>
+
+  <style>
+    /* Modal Styling */
+    #userChoiceModal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 300px;
+      font-family: 'Merriweather Sans', sans-serif;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 20px;
+    }
+
+    .modal-content button {
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .modal-content button:hover {
+      background-color: #0056b3;
+    }
+
+    .tab-container {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      background-color: #eee;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .current-tab {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .form-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .form-container input {
+      padding: 10px;
+      width: 200px;
+    }
+
+    .form-container button {
+      padding: 10px 20px;
+    }
+
+    .user-info-container,
+    .grant-location-container,
+    .loading-container,
+    .api-error-container {
+      display: none;
+      text-align: center;
+    }
+
+    .user-info-container.active,
+    .grant-location-container.active,
+    .loading-container.active,
+    .api-error-container.active,
+    .form-container.active {
+      display: block;
+    }
+
+    .extra-info {
+      margin-top: 20px;
+    }
+  </style>
+
+  <script>
+    function goToAdmin() {
+      window.location.href = "/admin";
+    }
+
+    function goToUser() {
+      document.getElementById("userChoiceModal").style.display = "none";
+      document.querySelector(".wrapper").style.display = "block";
+    }
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.body.style.overflow = "auto";
+      }, 2000);
+    });
+  </script>
 </body>
 </html>

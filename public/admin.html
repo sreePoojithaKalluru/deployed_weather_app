@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #cbe3f9, #e4f1fb);
+      color: #1a1a1a;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 123, 255, 0.15);
+    }
+
+    h2 {
+      color: #007acc;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #333;
+      font-size: 1rem;
+    }
+
+    ul.search-history {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    ul.search-history li {
+      padding: 15px;
+      margin-bottom: 12px;
+      background-color: #f0faff;
+      border-left: 5px solid #007acc;
+      border-radius: 8px;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    ul.search-history li:hover {
+      transform: scale(1.02);
+      background-color: #e3f4ff;
+    }
+
+    .logout-btn {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .logout-btn button {
+      padding: 12px 24px;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .logout-btn button:hover {
+      background-color: #005fa3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Admin Dashboard</h2>
+    <p>Welcome, Admin! Here you can view or manage weather data.</p>
+
+    <h4>Recent Weather Searches:</h4>
+    <ul class="search-history" id="searchList">
+      <!-- JavaScript will populate this -->
+    </ul>
+
+    <!-- 🔓 Fallback Logout button -->
+    <form action="/logout" method="POST" class="logout-btn">
+      <button type="submit">Logout</button>
+    </form>
+  </div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>
+
